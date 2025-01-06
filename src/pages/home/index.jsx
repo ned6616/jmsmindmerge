@@ -21,7 +21,7 @@ const Home = () => {
             </div>
             <div className='section'>
               <div className='container'>
-                <h1>What you Offer:</h1>
+                <h1>What we Offer:</h1>
                 <div className='row'>
                   <div className='col-lg-6'>
                     <h4>Corporate Trainings: </h4>
