@@ -1,0 +1,20 @@
+.fp-watermark {
+    display: none !important;
+  }
+  #bg-img-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Gradient layer */
+    url(../../assets/img/banner_bg.jpg) no-repeat center center;
+    background-size: cover;
+  }
+
+  .banner-wrapper p{
+    line-height: 1.5rem;
+  }
