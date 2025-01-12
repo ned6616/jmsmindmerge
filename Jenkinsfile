@@ -5,6 +5,7 @@ pipeline {
         SCANNER_HOME = tool 'sonarscanner' // SonarScanner tool name in Jenkins
         SONARQUBE_ENV = 'SonarQube'       // SonarQube environment name in Jenkins
         DEPLOY_DIR = '/var/www/html/jms' // Nginx deployment directory
+		WORKSPACE  = '/var/lib/jenkins/jms
     }
 
     stages {
@@ -50,7 +51,7 @@ pipeline {
         stage('Deploy to Nginx') {
             steps {
                 sh "sudo rm -rf ${DEPLOY_DIR}/*"
-                sh "sudo cp -r dist/* ${DEPLOY_DIR}/"
+                sh "sudo cp -r ${WORKSPACE}/dist/* ${DEPLOY_DIR}/"
                 sh 'sudo systemctl restart nginx'
             }
         }
