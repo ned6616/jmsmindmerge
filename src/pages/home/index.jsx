@@ -24,7 +24,7 @@ const Home = () => {
                 <h1>What we Offer:</h1>
                 <div className='row'>
                   <div className='col-lg-6'>
-                    <h4>GBS Corporate Trainingss: </h4>
+                    <h4>GBS PLUS Corporate Trainingss: </h4>
                     <p>
                       Tailored programs designed to upskill and develop your
                       workforce, enhancing performance and productivity.
