@@ -5,27 +5,37 @@ pipeline {
         SCANNER_HOME = tool 'sonarscanner' // SonarScanner tool name in Jenkins
         SONARQUBE_ENV = 'SonarQube'       // SonarQube environment name in Jenkins
         DEPLOY_DIR = '/var/www/html/jms' // Nginx deployment directory
-		WORKSPACE  = '/var/lib/jenkins/workspace/jms'
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                echo 'Cleaning the workspace...'
+                deleteDir() // Delete all files in the workspace
+            }
+        }
         stage('Checkout Source Code') {
             steps {
+                echo 'Checking out source code...'
                 checkout scm
+                sh "git log -1" // Show the latest commit for debugging
             }
         }
         stage('Install Dependencies') {
             steps {
+                echo 'Installing dependencies...'
                 sh 'npm install'
             }
         }
         stage('Build React Application') {
             steps {
+                echo 'Building the React application...'
                 sh 'npm run build'
             }
         }
         stage('SonarQube Analysis') {
             steps {
+                echo 'Running SonarQube analysis...'
                 withSonarQubeEnv(SONARQUBE_ENV) {
                     sh "${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=jmsmindmerge \
@@ -39,6 +49,7 @@ pipeline {
         stage('Wait for Quality Gate') {
             steps {
                 script {
+                    echo 'Waiting for SonarQube quality gate...'
                     timeout(time: 1, unit: 'MINUTES') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
@@ -50,8 +61,9 @@ pipeline {
         }
         stage('Deploy to Nginx') {
             steps {
+                echo 'Deploying to Nginx...'
                 sh "sudo rm -rf ${DEPLOY_DIR}/*"
-                sh "sudo cp -r ${WORKSPACE}/dist/* ${DEPLOY_DIR}/"
+                sh "sudo cp -r ${env.WORKSPACE}/dist/* ${DEPLOY_DIR}/"
                 sh 'sudo systemctl restart nginx'
             }
         }
@@ -60,6 +72,9 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed!'
+        }
+        success {
+            echo 'Pipeline succeeded!'
         }
         failure {
             echo 'Pipeline failed!'
