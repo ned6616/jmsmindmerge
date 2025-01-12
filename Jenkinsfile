@@ -5,7 +5,7 @@ pipeline {
         SCANNER_HOME = tool 'sonarscanner' // SonarScanner tool name in Jenkins
         SONARQUBE_ENV = 'SonarQube'       // SonarQube environment name in Jenkins
         DEPLOY_DIR = '/var/www/html/jms' // Nginx deployment directory
-		WORKSPACE  = '/var/lib/jenkins/jms
+		WORKSPACE  = '/var/lib/jenkins/workspace/jms'
     }
 
     stages {
