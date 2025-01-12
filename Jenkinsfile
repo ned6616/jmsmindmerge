@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SCANNER_HOME = tool 'SonarScanner' // SonarScanner tool name in Jenkins
+        SCANNER_HOME = tool 'sonarscanner' // SonarScanner tool name in Jenkins
         SONARQUBE_ENV = 'SonarQube'       // SonarQube environment name in Jenkins
         DEPLOY_DIR = '/var/www/html/jms' // Nginx deployment directory
     }
