@@ -5,7 +5,7 @@ pipeline {
         SCANNER_HOME = tool 'sonarscanner' // SonarScanner tool name in Jenkins
         SONARQUBE_ENV = 'SonarQube'       // SonarQube environment name in Jenkins
         DEPLOY_DIR = '/var/www/html/jms' // Nginx deployment directory
-        NEXUS_URL = 'http://http://91.121.36.194:8081/repository/npm-hosted/' // Nexus hosted repository URL
+        NEXUS_URL = 'http://91.121.36.194:8081/repository/npm-hosted/' // Nexus hosted repository URL
         NEXUS_USER = 'admin'             // Nexus username
         NEXUS_PASS = 'Pass#123'          // Nexus password
         ARTIFACT_NAME = 'jmsmindmerge-${BUILD_NUMBER}.zip' // Artifact name with version
